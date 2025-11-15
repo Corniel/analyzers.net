@@ -1,0 +1,68 @@
+<Project>
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Compiler options">
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <OutputType>library</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Diagnostics">
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>.NET (Roslyn) analyzers information</Title>
+    <ProductName>analyzers.net</ProductName>
+    <Description>
+      <![CDATA[
+Code to help to get insides about Roslyn.NET static code analyzers.
+]]>
+    </Description>
+    <Authors>
+      Corniel Nobel;
+      Wesley Baartman
+    </Authors>
+    <Owners>Corniel Nobel and Wesley Baartman</Owners>
+    <Copyright>Copyright © Corniel Nobel and Wesley Baartman 2025-current</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package info">
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags>
+      Roslyn;
+      analyzers;
+      static code analysis;
+    </PackageTags>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Debug Symbols">
+    <DebugType>portable</DebugType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
+    <RestoreLockedMode>true</RestoreLockedMode>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+</Project>

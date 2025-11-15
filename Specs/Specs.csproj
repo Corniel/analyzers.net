@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../AnalyzersNet/AnalyzersNet.csproj" />
+    <ProjectReference Include="../AnalyzersNet.NuGetCollector/AnalyzersNet.NuGetCollector.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="NUnit" />
+  </ItemGroup>
+
+  <ItemGroup Label="Build tools">
+    <PackageReference PrivateAssets="all" Include="coverlet.collector" />
+    <PackageReference PrivateAssets="all" Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference PrivateAssets="all" Include="NUnit3TestAdapter" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzers">
+    <PackageReference PrivateAssets="all" Include="AwesomeAssertions.Analyzers" />
+    <PackageReference PrivateAssets="all" Include="NUnit.Analyzers" />
+  </ItemGroup>
+
+</Project>

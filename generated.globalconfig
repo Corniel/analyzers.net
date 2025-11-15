@@ -1,0 +1,4 @@
+# Top level entry required to mark this as a global AnalyzerConfig file
+is_global = true
+
+# .NET diagnostics overrides

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path=".net.csproj" />
+  <Project Path="AnalyzersNet.NuGetCollector/AnalyzersNet.NuGetCollector.csproj" />
+  <Project Path="AnalyzersNet/AnalyzersNet.csproj" />
+  <Project Path="Specs/Specs.csproj" />
+</Solution>

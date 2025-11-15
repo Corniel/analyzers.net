@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" />
+    <PackageReference Include="NuGet.Common" />
+    <PackageReference Include="NuGet.Frameworks" />
+    <PackageReference Include="NuGet.Packaging" />
+    <PackageReference Include="NuGet.Protocol" />
+    <PackageReference Include="Qowaiv" />
+  </ItemGroup>
+  
+  <ItemGroup Label="Analyzers">
+    <PackageReference PrivateAssets="all" Include="Qowaiv.Analyzers.CSharp" />
+    <PackageReference PrivateAssets="all" Include="StyleCop.Analyzers.Unstable" />
+  </ItemGroup>
+
+</Project>

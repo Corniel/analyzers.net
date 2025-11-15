@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="data/**" />
+    <Content Include="packages/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="packages/**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference PrivateAssets="all" Include="DotNetProjectFile.Analyzers.Sdk" />
+  </ItemGroup>
+
+</Project>
