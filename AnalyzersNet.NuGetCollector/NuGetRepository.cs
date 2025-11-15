@@ -21,10 +21,10 @@ internal static class NuGetRepository
 
     /// <summary>Fetches the diagnostics of the analyzers.</summary>
     [Pure]
-    public static async Task<IReadOnlySet<DiagnosticAnalyzerInfo>> FetchDiagnosticsAsync(string packageId, bool includePrerelease = false)
+    public static async Task<IReadOnlySet<AnalyzerInfo>> FetchDiagnosticsAsync(string packageId, bool includePrerelease = false)
     {
         var folders = await ResolveFoldersAsync(packageId, includePrerelease);
-        var infos = new HashSet<DiagnosticAnalyzerInfo>();
+        var infos = new HashSet<AnalyzerInfo>();
         var assemblies = new List<Assembly>();
 
         foreach (var dll in folders
@@ -46,8 +46,7 @@ internal static class NuGetRepository
             }
         }
 
-        var version = await GetLatestVersionAsync(packageId, includePrerelease);
-
+     
         using (new AssemblyResolver(assemblies))
         {
             foreach (var assembly in assemblies)
@@ -78,12 +77,10 @@ internal static class NuGetRepository
 
                     foreach (var desc in analyzer.SupportedDiagnostics)
                     {
-                        infos.AddRange(languages.Select(lang => new DiagnosticAnalyzerInfo()
+                        infos.AddRange(languages.Select(lang => new AnalyzerInfo()
                         {
                             Id = DiagnosticId.Parse(desc.Id),
                             Language = lang,
-                            PackageId = packageId,
-                            Version = version,
                             Title = desc.Title.ToString(),
                             Description = desc.Description.ToString(),
                             CustomTags = [.. desc.CustomTags],

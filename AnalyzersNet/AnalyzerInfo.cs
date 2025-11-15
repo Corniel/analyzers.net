@@ -1,5 +1,5 @@
 using AnalyzersNet.Configuration;
-using NuGet.Versioning;
+using Qowaiv.Hashing;
 using System.Collections.Immutable;
 using System.Text.Json.Serialization;
 
@@ -10,25 +10,18 @@ namespace AnalyzersNet;
 /// version and language data.
 /// </summary>
 [DebuggerDisplay("{Id}: {Title} ({Language})")]
-public sealed record DiagnosticAnalyzerInfo :
-    IEquatable<DiagnosticAnalyzerInfo>,
-    IComparable<DiagnosticAnalyzerInfo>
+public sealed record AnalyzerInfo :
+    IEquatable<AnalyzerInfo>,
+    IComparable<AnalyzerInfo>
 {
-    /// <summary>The ID of the package.</summary>
-    public required string PackageId { get; init; }
-
-    /// <summary>The (latest) version of the diagnostic.</summary>
-    [JsonConverter(typeof(Json.NuGetVersionConverter))]
-    public required NuGetVersion Version { get; init; }
+    /// <inheritdoc cref="DiagnosticDescriptor.Id" />
+    public required DiagnosticId Id { get; init; }
 
     /// <summary>The language of the diagnostic.</summary>
     public required string Language { get; init; }
 
-    /// <inheritdoc cref="DiagnosticDescriptor.Id" />
-    public required DiagnosticId Id { get; init; }
-
     /// <inheritdoc cref="DiagnosticDescriptor.Title" />
-    public required string Title { get; init; }
+    public string Title { get; init; } = string.Empty;
 
     /// <inheritdoc cref="DiagnosticDescriptor.Description" />
     public string Description { get; init; } = string.Empty;
@@ -66,7 +59,7 @@ public sealed record DiagnosticAnalyzerInfo :
 
     /// <inheritdoc />
     [Pure]
-    public int CompareTo(DiagnosticAnalyzerInfo? other)
+    public int CompareTo(AnalyzerInfo? other)
     {
         if (other is null) return +1;
 
@@ -99,13 +92,12 @@ public sealed record DiagnosticAnalyzerInfo :
 
     /// <inheritdoc />
     [Pure]
-    public bool Equals(DiagnosticAnalyzerInfo? other)
+    public bool Equals(AnalyzerInfo? other)
         => other is { }
         && Id == other.Id
-        && PackageId == other.PackageId
         && Language == other.Language;
 
     /// <inheritdoc />
     [Pure]
-    public override int GetHashCode() => HashCode.Combine(Id, PackageId, Language);
+    public override int GetHashCode() => Hash.Code(Id).And(Language);
 }

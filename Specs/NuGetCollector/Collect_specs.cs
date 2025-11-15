@@ -1,11 +1,6 @@
 using AnalyzersNet;
 using AnalyzersNet.NuGetCollector;
-using Specs.Json;
 using System.Collections.Immutable;
-using System.IO;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Json.Serialization.Metadata;
 using System.Threading.Tasks;
 
 namespace Specs.NuGetCollector.Collect_specs;
@@ -16,42 +11,36 @@ public class Collects
     [Test]
     public async Task NuGet_packages()
     {
-        var lookup = await Collector.Collect(Packages);
+        var packages = await Collector.Collect(Packages);
 
-        var infos = new DiagnosticAnalyzerInfos(lookup);
+        var similars = Similars.Select(s => s.Select(s => DiagnosticId.Parse(s)).ToImmutableArray()).ToArray();
 
-        foreach (var similar in Similars.Select(s => s.Select(s => DiagnosticId.Parse(s)).ToImmutableArray()))
+        for (var p = 0; p < packages.Length; p++)
         {
-            foreach (var id in similar)
+            var package = packages[p];
+            var analyzers = package.Analyzers.ToArray();
+
+            for (var a = 0; a < analyzers.Length; a++)
             {
-                if (!lookup.TryGetValue(id, out var existing)) continue;
+                var analyzer = analyzers[a];
 
-                var lookups = existing.ToArray();
-
-                foreach (var (lang, entry) in lookups)
+                foreach (var similar in similars)
                 {
-                    lookup[id][lang] = entry with
+                    if (similar.FirstOrDefault(id => analyzer.Id == id) is { HasValue: true } id)
                     {
-                        Similar = [.. entry.Similar, .. similar.Remove(id)],
-                    };
+                        analyzer = analyzer with { Similar = [.. analyzer.Similar, .. similar.Remove(id)] };
+                    }
+
                 }
+                analyzers[a] = analyzer;
             }
+            packages[p] = package with { Analyzers = [.. analyzers] };
         }
 
-        infos.Should().NotBeEmpty();
+        packages.Should().NotBeEmpty();
 
-        using var stream = new FileStream("../../../../data/info2.json", FileMode.Create, FileAccess.Write);
-
-        await JsonSerializer.SerializeAsync(stream, infos, Options);
+        packages.Save("../../../../data/packages.json");
     }
-
-    private static readonly JsonSerializerOptions Options = new()
-    {
-        WriteIndented = true,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-        TypeInfoResolver = JsonSerializerOptions.Default.TypeInfoResolver!
-            .WithAddedModifier(CollectionMembersResolver.IgnoreEmpty),
-    };
 
     private static readonly ImmutableArray<ImmutableArray<string>> Similars =
     [

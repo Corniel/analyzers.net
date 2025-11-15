@@ -108,9 +108,9 @@ public sealed class AnalyzerConfiguration : IReadOnlyCollection<AnalyzerConfigSe
         }
     }
 
-    /// <summary>Creates new analyzer configuration based on <see cref="DiagnosticAnalyzerInfo"/>.</summary>
+    /// <summary>Creates new analyzer configuration based on <see cref="AnalyzerInfo"/>.</summary>
     [Pure]
-    public static AnalyzerConfiguration New(bool isGlobal, IEnumerable<DiagnosticAnalyzerInfo> diagnostics)
+    public static AnalyzerConfiguration New(bool isGlobal, IEnumerable<AnalyzerInfo> diagnostics)
     {
         var ecd = new AnalyzerConfiguration([]) { IsGlobal = isGlobal };
 

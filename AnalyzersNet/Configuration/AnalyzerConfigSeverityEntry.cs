@@ -79,9 +79,9 @@ public sealed record AnalyzerConfigSeverityEntry() : IComparable<AnalyzerConfigS
         return sb.ToString();
     }
 
-    /// <summary>Creates a new entry based on the <see cref="DiagnosticAnalyzerInfo"/>.</summary>
+    /// <summary>Creates a new entry based on the <see cref="AnalyzerInfo"/>.</summary>
     [Pure]
-    public static AnalyzerConfigSeverityEntry From(DiagnosticAnalyzerInfo info) => new()
+    public static AnalyzerConfigSeverityEntry From(AnalyzerInfo info) => new()
     {
         Id = info.Id,
         Severity = info.AnalyzerConfigSeverity,

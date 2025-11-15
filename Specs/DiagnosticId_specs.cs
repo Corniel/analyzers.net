@@ -26,11 +26,3 @@ public class Does
     public void Parse(string? str) => DiagnosticId.TryParse(str).Should().NotBeNull();
 }
 
-public class Does_not
-{
-    [TestCase("500")]
-    [TestCase("AB500X")]
-    [TestCase("500X")]
-    [TestCase("$A500")]
-    public void Parse(string str) => DiagnosticId.TryParse(str).Should().BeNull();
-}

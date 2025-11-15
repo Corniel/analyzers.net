@@ -1450,6 +1450,8 @@ dotnet_diagnostic.SA1102.severity   = warning    # Query clause should follow pr
 dotnet_diagnostic.SA1103.severity   = warning    # Query clauses should be on separate lines or all on one line
 dotnet_diagnostic.SA1104.severity   = warning    # Query clause should begin on new line when previous clause spans multiple lines
 dotnet_diagnostic.SA1105.severity   = warning    # Query clauses spanning multiple lines should begin on own line
+dotnet_diagnostic.SA1106.severity   = warning    # Code should not contain empty statements
+dotnet_diagnostic.SA1107.severity   = warning    # Code should not contain multiple statements on one line
 dotnet_diagnostic.SA1108.severity   = warning    # Block statements should not contain embedded comments
 
 dotnet_diagnostic.SA1109.severity   = none       # Block statements should not contain embedded regions
@@ -1467,6 +1469,7 @@ dotnet_diagnostic.SA1119.severity   = warning    # Statement should not use unne
 dotnet_diagnostic.SA1120.severity   = warning    # Comments should contain text
 dotnet_diagnostic.SA1121.severity   = warning    # Use built-in type alias
 dotnet_diagnostic.SA1122.severity   = warning    # Use string.Empty for empty strings
+dotnet_diagnostic.SA1123.severity   = warning    # Do not place regions within elements
 dotnet_diagnostic.SA1124.severity   = warning    # Do not use regions
 dotnet_diagnostic.SA1125.severity   = warning    # Use shorthand for nullable types
 
