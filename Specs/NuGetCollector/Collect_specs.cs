@@ -39,7 +39,7 @@ public class Collects
 
         packages.Should().NotBeEmpty();
 
-        packages.Save("../../../../data/packages.json");
+        packages.OrderBy(p => p.PackageId).Save("../../../../data/packages.json");
     }
 
     private static readonly ImmutableArray<ImmutableArray<string>> Similars =
@@ -72,6 +72,7 @@ public class Collects
         new("Apex.Analyzers.Immutable"),
         new("Ardalis.ApiEndpoints.CodeAnalyzers"),
         new("AsyncFixer"),
+        new("AWSSDK.AccessAnalyzer"),
         new("Bit.CodeAnalyzers"),
         new("BlowinCleanCode"),
         new("CodeCracker.CSharp"),
@@ -125,9 +126,11 @@ public class Collects
         new("Qowaiv.Analyzers.CSharp"),
         new("ReflectionAnalyzers"),
         new("Roslynator.Analyzers"),
+        new("Roslynator.Formatting.Analyzers"),
         new("RuntimeContracts.Analyzer"),
         new("SerilogAnalyzer"),
         new("SharpSource"),
+        new("SmartAnalyzers.CSharpExtensions.Annotations"),
         new("SonarAnalyzer.CSharp"),
         new("SonarAnalyzer.VisualBasic"),
         new("StructuredLogging.Analyzers"),

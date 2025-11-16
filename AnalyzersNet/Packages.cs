@@ -11,17 +11,17 @@ namespace AnalyzersNet;
 public static class Packages
 {
     /// <summary>Saves the <see cref="Package" />s to the specified path.</summary>
-    public static void Save(this IReadOnlyCollection<Package> packages, string path)
+    public static void Save(this IEnumerable<Package> packages, string path)
     {
         using var stream = new FileStream(path, FileMode.Create, FileAccess.Write);
         packages.Save(stream);
     }
 
     /// <summary>Saves the <see cref="Package" />s to the specified stream.</summary>
-    public static void Save(this IReadOnlyCollection<Package> packages, Stream stream)
+    public static void Save(this IEnumerable<Package> packages, Stream stream)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        JsonSerializer.Serialize(stream, packages, Options);
+        JsonSerializer.Serialize(stream, packages.ToArray(), Options);
     }
 
     /// <summary>Find the info bsaed on the ID and language.</summary>

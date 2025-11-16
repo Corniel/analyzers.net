@@ -29,7 +29,7 @@ public static class Collector
             {
                 PackageId = package.Id,
                 Version = await NuGetRepository.GetLatestVersionAsync(package.Id, package.IncludePreRelease),
-                Analyzers = [.. analyzers],
+                Analyzers = [.. analyzers.OrderBy(a => a.Id)],
             });
         }
 

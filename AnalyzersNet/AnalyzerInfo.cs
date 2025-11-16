@@ -33,7 +33,7 @@ public sealed record AnalyzerInfo :
     public ImmutableArray<string> CustomTags { get; init; } = [];
 
     /// <summary>Collection of similar rules.</summary>
-    public ImmutableHashSet<DiagnosticId> Similar { get; init; } = [];
+    public ImmutableSortedSet<DiagnosticId> Similar { get; init; } = [];
 
     /// <inheritdoc cref="DiagnosticDescriptor.DefaultSeverity" />
     [JsonConverter(typeof(JsonStringEnumConverter))]
